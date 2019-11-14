@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-
 import { LinearGradient } from 'expo-linear-gradient';
 import BottomNavBar from './BottomNavBar'
 
-export default class HomeScreen extends React.Component{
+export default class ProfileScreen extends React.Component{
     render() {
         return (
         <LinearGradient 
