@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
+import BottomNavBar from './BottomNavBar'
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -28,6 +29,10 @@ export default class HomeScreen extends React.Component {
         );
     }
 
+    handleChange = (event, value) => {
+        this.setState({ value });
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -42,6 +47,9 @@ export default class HomeScreen extends React.Component {
                 title={"Your Location"}
                 />}
                 </MapView>
+                <BottomNavBar 
+                    profile={() => this.props.navigation.navigate('Profile')}
+                    home={() => this.props.navigation.navigate('Home')}/>
             </View>
         )
     }
@@ -50,12 +58,13 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 50,
     },
     mapStyle: {
         width: '100%',
-        height: '100%',
+        height: '90%',
     }
   });

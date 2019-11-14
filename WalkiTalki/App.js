@@ -3,6 +3,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import SplashScreen from './components/SplashScreen'
 import HomeScreen from './components/HomeScreen'
+import ProfileScreen from './components/ProfileScreen'
 
 const RootStack = createStackNavigator(
   {
@@ -11,6 +12,9 @@ const RootStack = createStackNavigator(
     },
     Home: {
       screen: HomeScreen,
+    },
+    Profile: {
+      screen: ProfileScreen,
     }
   },
   {
