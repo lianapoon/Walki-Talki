@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import BottomNavBar from './BottomNavBar'
 
 export default class HomeScreen extends React.Component{
     render() {
@@ -25,6 +26,9 @@ export default class HomeScreen extends React.Component{
                     <Text style = {styles.headers}>Talks</Text>
                 </View>
             </View>
+            <BottomNavBar 
+                    profile={() => this.props.navigation.navigate('Profile')}
+                    home={() => this.props.navigation.navigate('Home')}/>
         </LinearGradient> 
         )
     }
