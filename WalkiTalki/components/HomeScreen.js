@@ -17,7 +17,6 @@ export default class HomeScreen extends React.Component {
     componentDidMount() {
         navigator.geolocation.getCurrentPosition(
            (position) => {
-             console.log(position);
              this.setState({
                latitude: position.coords.latitude,
                longitude: position.coords.longitude,
@@ -50,7 +49,9 @@ export default class HomeScreen extends React.Component {
                 <BottomNavBar 
                     profile={() => this.props.navigation.navigate('Profile')}
                     home={() => this.props.navigation.navigate('Home')}
-                    />
+                    camera={() => this.props.navigation.navigate('Camera')}
+                    messaging={() => this.props.navigation.navigate('Messaging')}
+                />
             </View>
         )
     }
@@ -66,6 +67,6 @@ const styles = StyleSheet.create({
     },
     mapStyle: {
         width: '100%',
-        height: '90%',
+        height: '91%',
     }
   });

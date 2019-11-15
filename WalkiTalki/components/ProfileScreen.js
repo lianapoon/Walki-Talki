@@ -27,8 +27,10 @@ export default class ProfileScreen extends React.Component{
                 </View>
             </View>
             <BottomNavBar 
-                    profile={() => this.props.navigation.navigate('Profile')}
-                    home={() => this.props.navigation.navigate('Home')}/>
+                profile={() => this.props.navigation.navigate('Profile')}
+                home={() => this.props.navigation.navigate('Home')}
+                camera={() => this.props.navigation.navigate('Camera')}
+                messaging={() => this.props.navigation.navigate('Messaging')}/>
         </LinearGradient> 
         )
     }

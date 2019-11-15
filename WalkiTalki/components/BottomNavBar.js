@@ -18,6 +18,16 @@ export default class BottomNavBar extends React.Component {
         this._menu.show();
     };
 
+    camera = () => {
+        this.hideMenu()
+        this.props.camera()
+    }
+
+    messaging = () => {
+        this.hideMenu()
+        this.props.messaging()
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -25,16 +35,16 @@ export default class BottomNavBar extends React.Component {
                     <Ionicons name='md-person' size={40} color='white' />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.props.home} style={styles.buttons}> 
-                    <Ionicons name='md-map' size={45} color='white' />
+                    <Ionicons name='ios-navigate' size={45} color='white' />
                 </TouchableOpacity>
                 <Menu
                     ref={this.setMenuRef}
                     button={<TouchableOpacity onPress={this.showMenu} style={styles.buttons}> 
                         <Ionicons name='md-menu' size={45} color='white' />
                         </TouchableOpacity>}>
-                    <MenuItem onPress={this.hideMenu} style={styles.menuItem}><Ionicons name='md-camera' size={40} color='white' /></MenuItem>
+                    <MenuItem onPress={this.camera} style={styles.menuItem}><Ionicons name='md-camera' size={40} color='white' /></MenuItem>
                     <MenuDivider />
-                    <MenuItem onPress={this.hideMenu} style={styles.menuItem}><Ionicons name='md-text' size={40} color='white' /></MenuItem>
+                    <MenuItem onPress={this.messaging} style={styles.menuItem}><Ionicons name='md-text' size={40} color='white' /></MenuItem>
                 </Menu>
             </View>
         )
@@ -47,7 +57,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       alignItems: 'center',
       width: '100%',
-      height: '10%',
+      height: '9%',
       backgroundColor: '#FF70A6',
     },
     menuItem: {

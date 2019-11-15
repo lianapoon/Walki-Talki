@@ -4,6 +4,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import SplashScreen from './components/SplashScreen'
 import HomeScreen from './components/HomeScreen'
 import ProfileScreen from './components/ProfileScreen'
+import CameraScreen from './components/CameraScreen'
+import MessagingScreen from './components/MessagingScreen';
 
 const RootStack = createStackNavigator(
   {
@@ -15,6 +17,12 @@ const RootStack = createStackNavigator(
     },
     Profile: {
       screen: ProfileScreen,
+    },
+    Camera: {
+      screen: CameraScreen
+    },
+    Messaging: {
+      screen: MessagingScreen
     }
   },
   {
