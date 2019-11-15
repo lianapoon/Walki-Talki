@@ -49,7 +49,8 @@ export default class HomeScreen extends React.Component {
                 </MapView>
                 <BottomNavBar 
                     profile={() => this.props.navigation.navigate('Profile')}
-                    home={() => this.props.navigation.navigate('Home')}/>
+                    home={() => this.props.navigation.navigate('Home')}
+                    />
             </View>
         )
     }
