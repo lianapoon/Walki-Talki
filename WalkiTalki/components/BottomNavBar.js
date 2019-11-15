@@ -21,11 +21,8 @@ export default class BottomNavBar extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={this.props.profile}> 
+                <TouchableOpacity onPress={this.props.profile} style={styles.buttons}> 
                     <Ionicons name='md-person' size={40} color='white' />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.props.home}> 
-                    <Ionicons name='md-map' size={40} color='white' />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.props.home} style={styles.buttons}> 
                     <Ionicons name='md-map' size={45} color='white' />
