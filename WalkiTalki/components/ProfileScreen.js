@@ -22,9 +22,7 @@ export default class ProfileScreen extends React.Component{
                 <View style = {{borderBottomColor:'white', borderBottomWidth:2,marginBottom:20}}>
                     <Text style = {styles.headers}>Walks</Text>
                 </View>
-                <View style = {{borderBottomColor:'white', borderBottomWidth:2, marginBottom:20}}>
-                    <Text style = {styles.headers}>Talks</Text>
-                </View>
+                <FlatList></FlatList>
             </View>
             <BottomNavBar 
                 profile={() => this.props.navigation.navigate('Profile')}
