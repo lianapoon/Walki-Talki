@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-
 import { LinearGradient } from 'expo-linear-gradient';
 import { SearchBar } from 'react-native-elements';
 import BottomNavBar from './BottomNavBar'
-import { GiftedChat } from 'react-native-gifted-chat'
+
 
 currentUserData = {
   name:'Current User',
@@ -17,23 +17,25 @@ const DATA = [
   },
   {
     username: 'Liana Poon',
-    messages:[]
+    messages:[{'Current User':'yeet'}]
   },
   {
     username:'Vismita Uppalli',
-    messages:[]
+    messages:[{'Current User':'heyo'}]
   },
   {
     username:'Sid Nanda',
-    messages:[]
+    messages:[{'Current User':'yo'}]
   }
 ];
 
-function Item({ username }) {
+function Item({ navigate,username }) {
   return (
-    <View style={styles.item}>
-      <Image style = {{width:65,height:65}} source={require('../assets/profilePic.png')}/>
-      <Text style = {{fontSize:20,color:'white',marginLeft:15}}>{username}</Text>
+    <View>
+      <TouchableOpacity style={styles.item} onPress={() =>  navigate('Chatting')}> 
+        <Image style = {{width:65,height:65}} source={require('../assets/profilePic.png')}/>
+        <Text style = {{fontSize:20,color:'white',marginLeft:15}}>{username}</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -53,6 +55,7 @@ export default class MessagingScreen extends React.Component {
     };
 
     render() {
+      const {navigate} = this.props.navigation;
       const {search} = this.state;
       return (
         <LinearGradient 
@@ -74,7 +77,7 @@ export default class MessagingScreen extends React.Component {
             <FlatList
               style = {{flex:1}}
               data = {activeChatList(DATA)}
-              renderItem={({ item }) => <Item username={item.username} />}
+              renderItem={({ item }) => <Item username={item.username} navigate = {navigate}/>}
               keyExtractor={item => item.username}
               ListEmptyComponent={
                 <View style = {styles.noMessagesScreen}>

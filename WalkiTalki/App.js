@@ -6,6 +6,7 @@ import HomeScreen from './components/HomeScreen'
 import ProfileScreen from './components/ProfileScreen'
 import CameraScreen from './components/CameraScreen'
 import MessagingScreen from './components/MessagingScreen';
+import ChatScreen from './components/ChatScreen';
 
 const RootStack = createStackNavigator(
   {
@@ -23,6 +24,9 @@ const RootStack = createStackNavigator(
     },
     Messaging: {
       screen: MessagingScreen
+    },
+    Chatting:{
+      screen:ChatScreen
     }
   },
   {
