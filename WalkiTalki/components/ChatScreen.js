@@ -1,19 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet,Image, TouchableOpacity} from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { GiftedChat } from 'react-native-gifted-chat'
+import { Ionicons } from '@expo/vector-icons';
 
 export default class ChatScreen extends React.Component{
     state = {
         messages: [],
       }
-    
+
       componentWillMount() {
         this.setState({
           messages: [
             {
               _id: 1,
-              text: 'Hello developer',
+              text: "Hello Dev",
               createdAt: new Date(),
               user: {
                 _id: 2,
@@ -34,6 +35,13 @@ export default class ChatScreen extends React.Component{
       render() {
         return (
         <View style = {styles.container}>
+            <View style = {styles.chatHeader}> 
+                <TouchableOpacity style = {styles.backBtn} onPress={()=>{this.props.navigation.navigate('Messaging')}}> 
+                    <Ionicons name='ios-arrow-round-back' size={40} color='black' />
+                </TouchableOpacity>
+                <Image style = {{width:45,height:45,margin:10}} source={require('../assets/profilePic.png')}/>
+                <Text style = {styles.chatHeader}>{this.props.navigation.getParam('userChat', 'Chat')}</Text>
+            </View>
           <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
@@ -49,6 +57,18 @@ export default class ChatScreen extends React.Component{
 
 const styles = StyleSheet.create({
     container:{
-        flex:1
+        flex:1,
+    },
+    chatHeader:{
+        flexDirection:'row',
+        fontSize:30,
+        paddingTop:20,
+        borderBottomColor:'black',
+        borderBottomWidth:1
+    },
+    backBtn:{
+        marginLeft:5,
+        marginTop:10,
+        marginRight:5
     }
 })

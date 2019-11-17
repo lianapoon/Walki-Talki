@@ -13,26 +13,26 @@ currentUserData = {
 const DATA = [
   {
     username: 'Sharon Bryant',
-    messages:[{'Current User': 'hello'}]
+    messages:[{'one': 'hello'}]
   },
   {
     username: 'Liana Poon',
-    messages:[{'Current User':'yeet'}]
+    messages:[{'one':'yeet'}]
   },
   {
     username:'Vismita Uppalli',
-    messages:[{'Current User':'heyo'}]
+    messages:[{'one':'heyo'}]
   },
   {
     username:'Sid Nanda',
-    messages:[{'Current User':'yo'}]
+    messages:[{'one':'yo'}]
   }
 ];
 
-function Item({ navigate,username }) {
+function Item({ navigate,username,messages }) {
   return (
     <View>
-      <TouchableOpacity style={styles.item} onPress={() =>  navigate('Chatting')}> 
+      <TouchableOpacity style={styles.item} onPress={() =>  navigate('Chatting', {userChat: username})}> 
         <Image style = {{width:65,height:65}} source={require('../assets/profilePic.png')}/>
         <Text style = {{fontSize:20,color:'white',marginLeft:15}}>{username}</Text>
       </TouchableOpacity>
