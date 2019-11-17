@@ -3,6 +3,45 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-
 import { LinearGradient } from 'expo-linear-gradient';
 import { SearchBar } from 'react-native-elements';
 import BottomNavBar from './BottomNavBar'
+import { GiftedChat } from 'react-native-gifted-chat'
+
+currentUserData = {
+  name:'Current User',
+  messages:[]
+}
+
+const DATA = [
+  {
+    username: 'Sharon Bryant',
+    messages:[{'Current User': 'hello'}]
+  },
+  {
+    username: 'Liana Poon',
+    messages:[]
+  },
+  {
+    username:'Vismita Uppalli',
+    messages:[]
+  },
+  {
+    username:'Sid Nanda',
+    messages:[]
+  }
+];
+
+function Item({ username }) {
+  return (
+    <View style={styles.item}>
+      <Image style = {{width:65,height:65}} source={require('../assets/profilePic.png')}/>
+      <Text style = {{fontSize:20,color:'white',marginLeft:15}}>{username}</Text>
+    </View>
+  );
+}
+function activeChatList(data){
+  return data.filter(chat => {
+       return chat.messages.length > 0 ? true : false
+    })
+}
 
 export default class MessagingScreen extends React.Component {
     state = {
@@ -27,7 +66,6 @@ export default class MessagingScreen extends React.Component {
               onChangeText = {this.updateSearch}
               searchIcon={{color:'white'}}
               value = {search}
-              round = "true"
               containerStyle={styles.searchContainer}
               inputContainerStyle={styles.searchInputContainer}
               placeholderTextColor='white'
@@ -35,6 +73,9 @@ export default class MessagingScreen extends React.Component {
             />
             <FlatList
               style = {{flex:1}}
+              data = {activeChatList(DATA)}
+              renderItem={({ item }) => <Item username={item.username} />}
+              keyExtractor={item => item.username}
               ListEmptyComponent={
                 <View style = {styles.noMessagesScreen}>
                   <Text style = {styles.noMessages}>No Messages</Text>
@@ -93,5 +134,10 @@ const styles = StyleSheet.create({
     padding:40,
     alignItems:'center',
     justifyContent:'space-between'
-  }
+  },
+  item: {
+    padding: 20,
+    flexDirection:'row',
+    alignItems:'center'
+  },
 })
