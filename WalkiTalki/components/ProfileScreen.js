@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import BottomNavBar from './BottomNavBar'
+import { Ionicons } from '@expo/vector-icons';
 
 export default class ProfileScreen extends React.Component{
     render() {
@@ -22,7 +23,14 @@ export default class ProfileScreen extends React.Component{
                 <View style = {{borderBottomColor:'white', borderBottomWidth:2,marginBottom:20}}>
                     <Text style = {styles.headers}>Walks</Text>
                 </View>
-                <FlatList></FlatList>
+                <FlatList
+                ListEmptyComponent={
+                    <View style = {styles.noWalks}>
+                        <Text style = {{color:'white', fontSize:30}}>No Walks Yet</Text>
+                        <Ionicons name='ios-walk' size={100} color='white' />
+                    </View>
+                  }
+                />
             </View>
             <BottomNavBar 
                 profile={() => this.props.navigation.navigate('Profile')}
@@ -73,12 +81,17 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
     posts:{
-        flex:2
+        flex:2,
     },
     gradientStyles: {
      flex: 1,
       flexDirection: 'column',
     },
+    noWalks:{
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center'
+    }
 
 })
 
