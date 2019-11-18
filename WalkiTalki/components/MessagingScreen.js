@@ -39,9 +39,14 @@ function Item({ navigate,username }) {
     </View>
   );
 }
-function activeChatList(data){
+function activeChatList(data, search){
   return data.filter(chat => {
+      if (search.length == 0){
        return chat.messages.length > 0 ? true : false
+      }
+      else{
+        return chat.username.toUpperCase().indexOf(search.toUpperCase()) > -1 ? true : false
+      }
     })
 }
 
@@ -76,7 +81,7 @@ export default class MessagingScreen extends React.Component {
             />
             <FlatList
               style = {{flex:1}}
-              data = {activeChatList(DATA)}
+              data = {activeChatList(DATA, search)}
               renderItem={({ item }) => <Item username={item.username} navigate = {navigate}/>}
               keyExtractor={item => item.username}
               ListEmptyComponent={
