@@ -13,7 +13,7 @@ currentUserData = {
 const DATA = [
   {
     username: 'Sharon Bryant',
-    messages:[{'message':"hello"}]
+    messages:[]
   },
   {
     username: 'Liana Poon',
@@ -45,7 +45,7 @@ function activeChatList(data, search){
        return chat.messages.length > 0 ? true : false
       }
       else{
-        return chat.username.toUpperCase().indexOf(search.toUpperCase()) > -1 ? true : false
+        return chat.username.toUpperCase().indexOf(search.toUpperCase()) > -1 && chat.messages.length > 0 ? true : false
       }
     })
 }
