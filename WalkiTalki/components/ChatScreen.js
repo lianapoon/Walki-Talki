@@ -3,12 +3,16 @@ import { View, Text, StyleSheet,Image, TouchableOpacity} from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { GiftedChat } from 'react-native-gifted-chat'
 import { Ionicons } from '@expo/vector-icons';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 export default class ChatScreen extends React.Component{
-    state = {
-        messages: [],
+    constructor(props){
+      super(props)
+      this.state = {
+        messages:[]
       }
-
+    }
       componentWillMount() {
         this.setState({
           messages: [
@@ -40,7 +44,7 @@ export default class ChatScreen extends React.Component{
                     <Ionicons name='ios-arrow-round-back' size={40} color='black' />
                 </TouchableOpacity>
                 <Image style = {{width:45,height:45,margin:10}} source={require('../assets/profilePic.png')}/>
-                <Text style = {styles.chatHeader}>{this.props.navigation.getParam('userChat', 'Chat')}</Text>
+                <Text style = {styles.headerText}>{this.props.navigation.getParam('userChat', 'Chat')}</Text>
             </View>
           <GiftedChat
             messages={this.state.messages}
@@ -61,10 +65,12 @@ const styles = StyleSheet.create({
     },
     chatHeader:{
         flexDirection:'row',
-        fontSize:30,
-        paddingTop:20,
         borderBottomColor:'black',
-        borderBottomWidth:1
+        borderBottomWidth:1,
+        alignItems:'center'
+    },
+    headerText:{
+      fontSize:30,
     },
     backBtn:{
         marginLeft:5,

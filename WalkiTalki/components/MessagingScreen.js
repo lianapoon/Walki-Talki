@@ -13,23 +13,23 @@ currentUserData = {
 const DATA = [
   {
     username: 'Sharon Bryant',
-    messages:[{'one': 'hello'}]
+    messages:[{'message':"hello"}]
   },
   {
     username: 'Liana Poon',
-    messages:[{'one':'yeet'}]
+    messages:[{'message':"yo"}]
   },
   {
     username:'Vismita Uppalli',
-    messages:[{'one':'heyo'}]
+    messages:[{'message':"hellolooooo"}]
   },
   {
     username:'Sid Nanda',
-    messages:[{'one':'yo'}]
+    messages:[{'message':"yo"}]
   }
 ];
 
-function Item({ navigate,username,messages }) {
+function Item({ navigate,username }) {
   return (
     <View>
       <TouchableOpacity style={styles.item} onPress={() =>  navigate('Chatting', {userChat: username})}> 
