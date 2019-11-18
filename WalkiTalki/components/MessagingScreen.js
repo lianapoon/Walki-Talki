@@ -13,19 +13,19 @@ currentUserData = {
 const DATA = [
   {
     username: 'Sharon Bryant',
-    messages:[]
+    messages:[{"message":'hello'}]
   },
   {
     username: 'Liana Poon',
-    messages:[{'message':"yo"}]
+    messages:[]
   },
   {
     username:'Vismita Uppalli',
-    messages:[{'message':"hellolooooo"}]
+    messages:[]
   },
   {
     username:'Sid Nanda',
-    messages:[{'message':"yo"}]
+    messages:[]
   }
 ];
 
@@ -48,6 +48,23 @@ function activeChatList(data, search){
         return chat.username.toUpperCase().indexOf(search.toUpperCase()) > -1 && chat.messages.length > 0 ? true : false
       }
     })
+}
+
+function noMessagesNoSearch(search){
+  if(search.length===0){
+    return(
+      <View style = {styles.noMessagesScreen}>
+      <Text style = {styles.noMessages}>No Messages</Text>
+      <Image source={require('../assets/noMessages.png')}/>
+    </View>
+    )
+  }
+  else{
+    return(
+    <View style = {styles.noMessagesScreen}>
+      <Text style = {styles.noMessages}>No Search Results ...</Text>
+    </View>)
+  }
 }
 
 export default class MessagingScreen extends React.Component {
@@ -84,12 +101,7 @@ export default class MessagingScreen extends React.Component {
               data = {activeChatList(DATA, search)}
               renderItem={({ item }) => <Item username={item.username} navigate = {navigate}/>}
               keyExtractor={item => item.username}
-              ListEmptyComponent={
-                <View style = {styles.noMessagesScreen}>
-                  <Text style = {styles.noMessages}>No Messages</Text>
-                  <Image source={require('../assets/noMessages.png')}/>
-                </View>
-              }
+              ListEmptyComponent={noMessagesNoSearch(search)}
             />
             <BottomNavBar 
                 profile={() => this.props.navigation.navigate('Profile')}
