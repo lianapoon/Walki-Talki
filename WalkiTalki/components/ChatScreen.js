@@ -13,23 +13,15 @@ export default class ChatScreen extends React.Component{
         messages:[]
       }
     }
+    // initialize with messages from firebase
       componentWillMount() {
         this.setState({
           messages: [
-            {
-              _id: 1,
-              text: "Hello Dev",
-              createdAt: new Date(),
-              user: {
-                _id: 2,
-                name: 'React Native',
-                avatar: 'https://placeimg.com/140/140/any',
-              },
-            },
+            {},
           ],
         })
       }
-    
+    // insert into firebase store with date
       onSend(messages = []) {
         this.setState(previousState => ({
           messages: GiftedChat.append(previousState.messages, messages),
@@ -64,6 +56,7 @@ const styles = StyleSheet.create({
         flex:1,
     },
     chatHeader:{
+        marginTop:20,
         flexDirection:'row',
         borderBottomColor:'black',
         borderBottomWidth:1,
