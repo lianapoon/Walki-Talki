@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-
 import { LinearGradient } from 'expo-linear-gradient';
 import { SearchBar } from 'react-native-elements';
 import BottomNavBar from './BottomNavBar'
+import { Time } from 'react-native-gifted-chat';
 
 
 currentUserData = {
@@ -13,28 +14,32 @@ currentUserData = {
 const DATA = [
   {
     username: 'Sharon Bryant',
-    messages:[{"message":'hello'}]
+    messages:[{"message":'hello'}],
+    id: 1
   },
   {
     username: 'Liana Poon',
-    messages:[]
+    messages:[{"message":'yo'}],
+    id:2
   },
   {
     username:'Vismita Uppalli',
-    messages:[]
+    messages:[{"message":'yoyo'}],
+    id:3
   },
   {
     username:'Sid Nanda',
-    messages:[]
+    messages:[{"message":'hi'}],
+    id:4
   }
 ];
 
-function Item({ navigate,username }) {
+function Item({ navigate,item }) {
   return (
     <View>
-      <TouchableOpacity style={styles.item} onPress={() =>  navigate('Chatting', {userChat: username})}> 
+      <TouchableOpacity style={styles.item} onPress={() =>  navigate('Chatting', {userChat: item.username, uid: item.id, history:item.messages[0].message})}> 
         <Image style = {{width:65,height:65}} source={require('../assets/profilePic.png')}/>
-        <Text style = {{fontSize:20,color:'white',marginLeft:15}}>{username}</Text>
+        <Text style = {{fontSize:20,color:'white',marginLeft:15}}>{item.username}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -51,7 +56,7 @@ function activeChatList(data, search){
 }
 
 function noMessagesNoSearch(search){
-  if(search.length===0){
+  if(search.length === 0){
     return(
       <View style = {styles.noMessagesScreen}>
       <Text style = {styles.noMessages}>No Messages</Text>
@@ -99,7 +104,7 @@ export default class MessagingScreen extends React.Component {
             <FlatList
               style = {{flex:1}}
               data = {activeChatList(DATA, search)}
-              renderItem={({ item }) => <Item username={item.username} navigate = {navigate}/>}
+              renderItem={({ item }) => <Item item={item} navigate = {navigate}/>}
               keyExtractor={item => item.username}
               ListEmptyComponent={noMessagesNoSearch(search)}
             />
