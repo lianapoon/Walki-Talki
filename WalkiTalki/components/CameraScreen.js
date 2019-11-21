@@ -4,8 +4,12 @@ import * as Permissions from 'expo-permissions';
 import { Ionicons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import BottomNavBar from './BottomNavBar'
+import * as firebase from 'firebase';
+import '@firebase/firestore';
+import {dbh} from '../firebase.js'
 
 export default class CameraScreen extends React.Component {
+
   cameraRef = React.createRef();
   state = {
     hasCameraPermission: null,
@@ -13,6 +17,7 @@ export default class CameraScreen extends React.Component {
   };
 
   async componentDidMount() {
+    // set up camera permissions
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
@@ -21,7 +26,10 @@ export default class CameraScreen extends React.Component {
     if(this.cameraRef){
       let photo = await this.cameraRef.current.takePictureAsync();
       console.log(photo);
-    }  
+      dbh.ref('photos/' + global.userObj.id).push().set({
+        pic: photo.uri,
+      });
+    }
   }
 
   render() {
@@ -63,7 +71,7 @@ export default class CameraScreen extends React.Component {
               </TouchableOpacity>
             </View>
           </Camera>
-          <BottomNavBar 
+          <BottomNavBar
             profile={() => this.props.navigation.navigate('Profile')}
             home={() => this.props.navigation.navigate('Home')}
             camera={() => this.props.navigation.navigate('Camera')}

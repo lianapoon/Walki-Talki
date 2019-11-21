@@ -1,12 +1,27 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import GridList from 'react-native-grid-list';
 import BottomNavBar from './BottomNavBar'
-import { Ionicons } from '@expo/vector-icons';
+import '@firebase/firestore';
+import {dbh} from '../firebase.js'
 
-export default class ProfileScreen extends React.Component{
+export default class ProfileScreen extends React.Component {
+    // The get pics function queries firebase to find the pictures based on the current userID
+    getPics = () => {
+        picList = []
+        dbh.ref('photos/' + global.userObj.id).on('value', (snapshot) => {
+            snapshot.forEach(function(childSnapshot) {
+                childData = childSnapshot.val();
+                this.picList.push(childData.pic)
+            })
+        })
+        return picList;
+    }
+
     render() {
         return (
+        // Calls the getPics function and renders all saved pictures corresponding to the logged in user
         <LinearGradient
           start={[1,1]}
           end={[0.4, 0.3]}
@@ -21,15 +36,12 @@ export default class ProfileScreen extends React.Component{
             </View>
             <View style = {styles.posts}>
                 <View style = {{borderBottomColor:'white', borderBottomWidth:2,marginBottom:20}}>
-                    <Text style = {styles.headers}>Walks</Text>
+                    <Text style = {styles.headers}>Photos</Text>
                 </View>
-                <FlatList
-                ListEmptyComponent={
-                    <View style = {styles.noWalks}>
-                        <Text style = {{color:'white', fontSize:30}}>No Walks Yet</Text>
-                        <Ionicons name='ios-walk' size={100} color='white' />
-                    </View>
-                  }
+                <GridList
+                    data={this.getPics()}
+                    numColumns={3}
+                    renderItem={({item}) => <Image style={{width: 120, height: 120}}source={{uri: item}}/>}
                 />
             </View>
             <BottomNavBar

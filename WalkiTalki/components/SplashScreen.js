@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Google from 'expo-google-app-auth';
 
 export default class SplashScreen extends React.Component {
-
+  // Google OAuth
   signInWithGoogleAsync = async() => {
     try {
       const { type, accessToken, user } = await Google.logInAsync({
@@ -14,6 +14,7 @@ export default class SplashScreen extends React.Component {
         scopes: ['profile', 'email'],
       });
       if (type === 'success') {
+        console.log(user)
         this.props.navigation.navigate('Home')
         global.userObj = user
         return accessToken
