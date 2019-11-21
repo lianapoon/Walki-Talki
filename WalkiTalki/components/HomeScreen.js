@@ -6,7 +6,7 @@ import BottomNavBar from './BottomNavBar'
 export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
-    
+
         this.state = {
           latitude: null,
           longitude: null,
@@ -46,7 +46,7 @@ export default class HomeScreen extends React.Component {
                 title={"Your Location"}
                 />}
                 </MapView>
-                <BottomNavBar 
+                <BottomNavBar
                     profile={() => this.props.navigation.navigate('Profile')}
                     home={() => this.props.navigation.navigate('Home')}
                     camera={() => this.props.navigation.navigate('Camera')}

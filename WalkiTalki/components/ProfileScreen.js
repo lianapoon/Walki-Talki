@@ -7,15 +7,15 @@ import { Ionicons } from '@expo/vector-icons';
 export default class ProfileScreen extends React.Component{
     render() {
         return (
-        <LinearGradient 
+        <LinearGradient
           start={[1,1]}
           end={[0.4, 0.3]}
-            colors={[ '#FF70A6', '#4BB3FD',]} 
+            colors={[ '#FF70A6', '#4BB3FD',]}
             style={styles.gradientStyles}>
             <View style = {styles.profileInfo}>
-                <Image source={require('../assets/profilePic.png')}/>
-                <Text style = {styles.userName}>UserName</Text>   
-                <TouchableOpacity style = {styles.editButton}> 
+                <Image style={{width: 75, height: 75}} source={{uri: global.userObj.photoUrl}}/>
+                <Text style = {styles.userName}>{global.userObj.name}</Text>
+                <TouchableOpacity style = {styles.editButton}>
                     <Text style={styles.button}> Edit Profile </Text>
                 </TouchableOpacity>
             </View>
@@ -32,12 +32,12 @@ export default class ProfileScreen extends React.Component{
                   }
                 />
             </View>
-            <BottomNavBar 
+            <BottomNavBar
                 profile={() => this.props.navigation.navigate('Profile')}
                 home={() => this.props.navigation.navigate('Home')}
                 camera={() => this.props.navigation.navigate('Camera')}
                 messaging={() => this.props.navigation.navigate('Messaging')}/>
-        </LinearGradient> 
+        </LinearGradient>
         )
     }
 }
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingRight: 30,
         paddingLeft: 30,
-          
+
     },
     editButton:{
         fontWeight: 'bold',
