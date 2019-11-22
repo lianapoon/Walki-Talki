@@ -4,75 +4,33 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SearchBar } from 'react-native-elements';
 import BottomNavBar from './BottomNavBar'
 import { Time } from 'react-native-gifted-chat';
+import '@firebase/firestore';
+import {dbh} from '../firebase.js'
 
-
-currentUserData = {
-  name:'Current User',
-  messages:[]
-}
-
-const DATA = [
-  {
-    username: 'Sharon Bryant',
-    messages:[{"message":'hello'}],
-    id: 1
-  },
-  {
-    username: 'Liana Poon',
-    messages:[{"message":'yo'}],
-    id:2
-  },
-  {
-    username:'Vismita Uppalli',
-    messages:[{"message":'yoyo'}],
-    id:3
-  },
-  {
-    username:'Sid Nanda',
-    messages:[{"message":'hi'}],
-    id:4
-  }
-];
-
+// pass friends id
 function Item({ navigate,item }) {
   return (
     <View>
-      <TouchableOpacity style={styles.item} onPress={() =>  navigate('Chatting', {userChat: item.username, uid: item.id, history:item.messages[0].message})}> 
-        <Image style = {{width:65,height:65}} source={require('../assets/profilePic.png')}/>
-        <Text style = {{fontSize:20,color:'white',marginLeft:15}}>{item.username}</Text>
+      <TouchableOpacity style={styles.item} onPress={() =>  navigate('Chatting', {user: item})}> 
+        <Image style = {{width:65,height:65}} source={{uri: item.photoUrl}}/>
+        <Text style = {{fontSize:20,color:'white',marginLeft:15}}>{item.name}</Text>
       </TouchableOpacity>
     </View>
   );
 }
-function activeChatList(data, search){
-  return data.filter(chat => {
-      if (search.length == 0){
-       return chat.messages.length > 0 ? true : false
-      }
-      else{
-        return chat.username.toUpperCase().indexOf(search.toUpperCase()) > -1 && chat.messages.length > 0 ? true : false
-      }
-    })
-}
-
-function noMessagesNoSearch(search){
-  if(search.length === 0){
-    return(
-      <View style = {styles.noMessagesScreen}>
-      <Text style = {styles.noMessages}>No Messages</Text>
-      <Image source={require('../assets/noMessages.png')}/>
-    </View>
-    )
-  }
-  else{
-    return(
-    <View style = {styles.noMessagesScreen}>
-      <Text style = {styles.noMessages}>No Search Results ...</Text>
-    </View>)
-  }
-}
 
 export default class MessagingScreen extends React.Component {
+  getUsers = () => {
+    userList = []
+    dbh.ref('users/').on('value', (snapshot) => {
+      snapshot.forEach(function(childSnapshot) {
+        childData = childSnapshot.val();
+        this.userList.push(childData)
+        })
+    })
+    return userList;
+  }
+
     state = {
       search:'',
     };
@@ -80,7 +38,7 @@ export default class MessagingScreen extends React.Component {
     updateSearch = search=>{
       this.setState({search});
     };
-
+      
     render() {
       const {navigate} = this.props.navigation;
       const {search} = this.state;
@@ -103,10 +61,9 @@ export default class MessagingScreen extends React.Component {
             />
             <FlatList
               style = {{flex:1}}
-              data = {activeChatList(DATA, search)}
-              renderItem={({ item }) => <Item item={item} navigate = {navigate}/>}
-              keyExtractor={item => item.username}
-              ListEmptyComponent={noMessagesNoSearch(search)}
+              data = {this.getUsers()}
+              renderItem={({ item }) => <Item item={item} navigate={navigate}/>}
+              keyExtractor={item => item.id}
             />
             <BottomNavBar 
                 profile={() => this.props.navigation.navigate('Profile')}
