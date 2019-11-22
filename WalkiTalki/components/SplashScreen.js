@@ -2,6 +2,9 @@ import * as React from 'react';
 import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Google from 'expo-google-app-auth';
+import '@firebase/firestore';
+import {dbh} from '../firebase.js'
+
 
 export default class SplashScreen extends React.Component {
   // Google OAuth
@@ -17,6 +20,7 @@ export default class SplashScreen extends React.Component {
         console.log(user)
         this.props.navigation.navigate('Home')
         global.userObj = user
+        dbh.ref('users/'+global.userObj.id).set(global.userObj)
         return accessToken
       } else {
         return { cancelled: true };
