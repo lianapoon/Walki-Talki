@@ -4,25 +4,17 @@ import { Ionicons } from '@expo/vector-icons';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 export default class BottomNavBar extends React.Component {
-        _menu = null;
-    
-    setMenuRef = ref => {
-        this._menu = ref;
-    };
-    
-    hideMenu = () => {
-        this._menu.hide();
-    };
-    
-    showMenu = () => {
-        this._menu.show();
-    };
+    // menu functions
+    _menu = null;
+    setMenuRef = ref => {  this._menu = ref; };
+    hideMenu = () => { this._menu.hide(); };
+    showMenu = () => { this._menu.show(); };
 
+    // navigation functions
     camera = () => {
         this.hideMenu()
         this.props.camera()
     }
-
     messaging = () => {
         this.hideMenu()
         this.props.messaging()
