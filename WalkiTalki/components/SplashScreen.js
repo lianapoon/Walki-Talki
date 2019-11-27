@@ -21,6 +21,7 @@ export default class SplashScreen extends React.Component {
         this.props.navigation.navigate('Home')
         global.userObj = user
         dbh.ref('users/'+global.userObj.id).set(global.userObj)
+        global.accessToken = accessToken
         return accessToken
       } else {
         return { cancelled: true };

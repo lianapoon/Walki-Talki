@@ -7,13 +7,19 @@ import GridList from 'react-native-grid-list';
 import BottomNavBar from './BottomNavBar'
 import '@firebase/firestore';
 import {dbh} from '../firebase.js'
+import * as Google from 'expo-google-app-auth';
 
 export default class ProfileScreen extends React.Component {
     //google functions
     signOutWithGoogleAsync = async() => {
-        alert('sign out with google')
+        accessToken = global.accessToken
+        const config = {
+            expoClientId: '954454536268-rrbr2sr8gjusjsnr5nkd1guahvehhfc1.apps.googleusercontent.com',
+            iosClientId: '954454536268-gdlq70okb450gl55dm50tdsu0grg63c2.apps.googleusercontent.com',
+            androidClientId: '954454536268-lf8l03qtu51733c0067gs0i9v76tr00v.apps.googleusercontent.com'}
+        await Google.logOutAsync({accessToken, ...config})
     }
-    
+
     // menu functions
     _menu = null;
     setMenuRef = ref => { this._menu = ref; };
@@ -43,10 +49,13 @@ export default class ProfileScreen extends React.Component {
             <View style={styles.settings}>
                 <Menu
                     ref={this.setMenuRef}
-                    button={<TouchableOpacity onPress={this.showMenu} style={styles.buttons}> 
+                    button={<TouchableOpacity onPress={this.showMenu} style={styles.buttons}>
                         <Ionicons name='md-settings' size={40} color='white'/>
                         </TouchableOpacity>}>
-                    <MenuItem style={styles.menuItem} onPress={() => this.signOutWithGoogleAsync()}> <Text style={{color: 'white', fontSize: 20}}>Logout</Text> </MenuItem>
+                    <MenuItem style={styles.menuItem} onPress={() => {
+                        this.signOutWithGoogleAsync()
+                        this.props.navigation.navigate('Splash')}}> <Text style={{color: 'white', fontSize: 20}}>Logout</Text>
+                    </MenuItem>
                 </Menu>
             </View>
             <View style = {styles.profileInfo}>
