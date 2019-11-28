@@ -29,6 +29,12 @@ export default class CameraScreen extends React.Component {
       dbh.ref('photos/' + global.userObj.id).push().set({
         pic: photo.uri,
       });
+      dbh.ref('allPhotos/').push().set({
+        pic: photo.uri,
+        latitude: global.latitude,
+        longitude: global.longitude,
+        name: global.userObj.name
+      });
     }
   }
 

@@ -72,7 +72,7 @@ export default class ProfileScreen extends React.Component {
                 <GridList
                     data={this.getPics()}
                     numColumns={3}
-                    renderItem={({item}) => <Image style={{width: 120, height: 120}}source={{uri: item}}/>}
+                    renderItem={({item}) => <Image style={{width: 120, height: 120}} source={{uri: item}}/>}
                     style={{marginLeft: 5}}
                 />
             </View>
