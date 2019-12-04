@@ -25,7 +25,9 @@ export default class MessagingScreen extends React.Component {
     dbh.ref('users/').on('value', (snapshot) => {
       snapshot.forEach(function(childSnapshot) {
         childData = childSnapshot.val();
-        this.userList.push(childData)
+        if(global.userObj.id != childData.id){
+          this.userList.push(childData)
+        } 
         })
     })
     return userList;
