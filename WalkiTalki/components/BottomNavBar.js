@@ -24,15 +24,15 @@ export default class BottomNavBar extends React.Component {
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={this.props.profile} style={styles.buttons}> 
-                    <Ionicons name='md-person' size={40} color='white' />
+                    <Ionicons name='md-person' size={30} color='white' />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.props.home} style={styles.buttons}> 
-                    <Ionicons name='ios-navigate' size={45} color='white' />
+                    <Ionicons name='ios-navigate' size={30} color='white' />
                 </TouchableOpacity>
                 <Menu
                     ref={this.setMenuRef}
                     button={<TouchableOpacity onPress={this.showMenu} style={styles.buttons}> 
-                        <Ionicons name='md-menu' size={45} color='white' />
+                        <Ionicons name='md-menu' size={30} color='white' />
                         </TouchableOpacity>}>
                     <MenuItem onPress={this.camera} style={styles.menuItem}><Ionicons name='md-camera' size={40} color='white' /></MenuItem>
                     <MenuDivider />

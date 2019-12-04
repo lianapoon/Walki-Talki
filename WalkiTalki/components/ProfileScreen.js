@@ -35,6 +35,7 @@ export default class ProfileScreen extends React.Component {
                 this.picList.push(childData.pic)
             })
         })
+        picList.reverse()
         return picList;
     }
 
@@ -61,9 +62,6 @@ export default class ProfileScreen extends React.Component {
             <View style = {styles.profileInfo}>
                 <Image style={{width: 100, height: 100}} source={{uri: global.userObj.photoUrl}}/>
                 <Text style = {styles.userName}>{global.userObj.name}</Text>
-                <TouchableOpacity style = {styles.editButton}>
-                    <Text style={styles.button}> Edit Profile </Text>
-                </TouchableOpacity>
             </View>
             <View style = {styles.posts}>
                 <View style = {{borderBottomColor:'white', borderBottomWidth:2,marginBottom:20}}>
