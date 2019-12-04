@@ -37,15 +37,14 @@ export default class HomeScreen extends React.Component {
            { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
         );
         DeviceMotion.addListener(motion=>{
-            console.log(motion)
-            if (motion.rotationRate.alpha > 3){
+            if (motion.rotationRate.gamma > 5 || motion.rotationRate.gamma < -5){
                 this.handleShake()
             }
         })
     }
 
     handleShake = () =>{
-        alert("handling shake")
+        this.props.navigation.navigate('Camera')
     }
 
     componentWillUnmount(){
