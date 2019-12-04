@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 import '@firebase/firestore';
 import {dbh} from '../firebase.js'
 import Modal from "react-native-modal";
+import {DeviceMotion} from 'expo-sensors';
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -35,8 +36,21 @@ export default class HomeScreen extends React.Component {
            (error) => this.setState({ error: error.message }),
            { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
         );
+        DeviceMotion.addListener(motion=>{
+            console.log(motion)
+            if (motion.rotationRate.alpha > 3){
+                this.handleShake()
+            }
+        })
     }
-    
+
+    handleShake = () =>{
+        alert("handling shake")
+    }
+
+    componentWillUnmount(){
+        DeviceMotion.removeAllListeners();
+    }
     closePopup = () => {this.setState({visibility: false})}
 
     getPics = () => {
