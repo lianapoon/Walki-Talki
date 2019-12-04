@@ -51,9 +51,7 @@ export default class HomeScreen extends React.Component {
         return picList
     }
 
-    randColor = () => {
-        return '#'+(Math.random()*0xFFFFFF<<0).toString(16)
-    }
+    randomColor = require('randomcolor');
 
     markerClick = (picture) => {
         this.setState({visibility: true, uri: picture.uri})
@@ -69,16 +67,20 @@ export default class HomeScreen extends React.Component {
                     latitudeDelta: 1,
                     longitudeDelta: 1
                 }}>
-                {!!this.state.latitude && !!this.state.longitude && <MapView.Marker
-                coordinate={{"latitude":this.state.latitude,"longitude":this.state.longitude}}
-                title={"Your Location"}
-                />}
-                {this.getPics().map(pic => (
+                {this.getPics().filter(pic => pic.name == global.userObj.name).map(pic => (
                     <MapView.Marker
                         key={pic.name + pic.latitude + pic.longitude}
                         coordinate={{"latitude":pic.latitude,"longitude":pic.longitude}}
-                        pinColor={this.randColor()}
+                        pinColor={'black'}
                         onPress={() => this.markerClick(pic)}>
+                    </MapView.Marker>
+                ))}
+                {this.getPics().filter(pic => pic.name != global.userObj.name).map(pic => (
+                    <MapView.Marker
+                        key={pic.name + pic.latitude + pic.longitude}
+                        coordinate={{"latitude":pic.latitude,"longitude":pic.longitude}}
+                        pinColor={this.randomColor()}
+                        title={pic.name}>
                     </MapView.Marker>
                 ))}
                 <View>
