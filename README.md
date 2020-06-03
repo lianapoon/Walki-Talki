@@ -2,10 +2,10 @@
 
 CS 4720: Mobile App Development - Final Project <br /> <br />
 Contributors: 
-* Vismita Uppalli
+* Liana Poon
 * Siddharth Nanda
 * Sharon Bryant
-* Liana Poon
+* Vismita Uppalli
 
 # Documentation
 
